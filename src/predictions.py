@@ -2,6 +2,9 @@ import pickle
 import pandas as pd
 from utils import *
 import os
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransformer
+from sklearn.compose import ColumnTransformer
 
 # Get the current folder
 current_folder = os.path.dirname(os.path.abspath(__file__))
@@ -14,14 +17,13 @@ loaded_model = pickle.load(open('../model/test_model.sav', 'rb'))
 
 # Load Test Data
 data = pd.read_csv("../data/numbers.csv")
-data = data.sample(int(0.1*len(data)), axis=0) # Sample test set
+data = data.sample(int(0.3*len(data)), axis=0) # Sample test set
 
 # Clean Data
 dc = Datacleaner(data)
 dc.drop_na()
 dc.unnecessary_cols(['date', 'device'])
 data = dc.create_response('Country')
-
 
 # Define X and y
 X_test = data.drop(['Country'], axis=1)
@@ -32,3 +34,10 @@ result = loaded_model.score(X_test, y_test)
 
 # Print results
 print(f"Score of model: {result}")
+
+# Print y_test and y_predict
+y_pred = loaded_model.predict(X_test)
+print(f"y_pred: {y_pred}")
+print(f"y_test: {y_test}")
+
+

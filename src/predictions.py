@@ -35,9 +35,5 @@ result = loaded_model.score(X_test, y_test)
 # Print results
 print(f"Score of model: {result}")
 
-# Print y_test and y_predict
-y_pred = loaded_model.predict(X_test)
-print(f"y_pred: {y_pred}")
-print(f"y_test: {y_test}")
 
 

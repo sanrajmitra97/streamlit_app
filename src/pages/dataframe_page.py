@@ -23,7 +23,14 @@ if dim:
     st.write(f"Dimensions of the data: {r} rows and {c} columns.")
 
 # Categorical columns
-st.markdown("We only have 1 predictor variable that's categorical, and that's `App`. The 3 values are: ")
 x,y,z= data.App.unique()
+st.markdown("We only have 1 predictor variable that's categorical, and that's `App`.")
+if st.button("Show categories"):
+    st.markdown(f"{x}, {y}, {z}")
 
 
+# Continuous columns
+cont_data = data[data.columns[2:]]
+st.markdown("Here are the descriptor statistics for the continuous variables.")
+if st.button("Show descriptions of continuous variables"):
+    st.write(cont_data.describe())

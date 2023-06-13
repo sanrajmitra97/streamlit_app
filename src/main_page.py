@@ -46,14 +46,14 @@ st.markdown("To learn more about our dataset and its features, visit the `datafr
 
 # Choose the categorical variable
 categories = data.App.unique()
-App = st.selectbox('Choose application type', categories)
+App = st.radio('Choose application type', categories)
 st.write(f'You have selected: {App}')
 
 # Choose variables
 numerical_columns = data.columns[2:]
 res = []
 for col in numerical_columns:
-    val = st.number_input(f"Choose number of {col}", min_value = data[col].min(), max_value=data[col].max())
+    val = st.number_input(f"Choose number of {col} from {data[col].min()} and {data[col].max()}", min_value = data[col].min(), max_value=data[col].max())
     st.write(f'You have selected: {val} for the {col}')
     res.append(val)
 
